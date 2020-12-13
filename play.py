@@ -1,3 +1,5 @@
+"""This play.py is the main file, using helper's functions to create the Minimax Algorithm"""
+
 import math
 from helper import print_board, empty_cells, check_current_state, player_move, evaluate_play
 
@@ -21,8 +23,10 @@ def minimax_alpha_beta_pruning(state, player_turn, alpha=-math.inf, beta=math.in
         x, y = cell[0], cell[1]
         state[x][y] = player_turn
         if player_turn == 'O':
+            # switch turn to find max score
             result = minimax_alpha_beta_pruning(state, "X", alpha, beta)
         else:
+            # switch turn to find min score
             result = minimax_alpha_beta_pruning(state, "O", alpha, beta)
 
         state[x][y] = " "  # make cell empty because of recursion
@@ -40,6 +44,7 @@ def minimax_alpha_beta_pruning(state, player_turn, alpha=-math.inf, beta=math.in
                 best = result
                 beta = min(best['score'], beta)
 
+        # Alpha can't be larger than Beta
         if alpha >= beta:
             break
 
@@ -58,6 +63,7 @@ if __name__ == '__main__':
         state = "Playing"
         print_board(game_state)
 
+        # input state
         while True:
             player = input(
                 "Please select player to go first (O is you, X is computer): ").upper()
@@ -70,6 +76,7 @@ if __name__ == '__main__':
             else:
                 print('Please enter a valid selection!!!')
 
+        # playing state
         while state == 'Playing':
             if player == "O":
                 player_input = input(
@@ -104,6 +111,7 @@ if __name__ == '__main__':
             if state == 'Draw':
                 print('Its a tie!')
 
+        # restart state
         print("-----------------------------------------")
         restart = input('Do you wanna play again? (Y/N): ').upper()
         if restart == "N":

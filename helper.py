@@ -1,3 +1,6 @@
+""" This helper.py contains some functions to help the Minimax Algorithm and game console. """
+
+
 def print_board(state):
     print("  -------------------")
     print("  |  {}  |  {}  |  {}  |".format(
